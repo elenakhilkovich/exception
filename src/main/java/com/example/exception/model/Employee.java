@@ -2,21 +2,15 @@ package com.example.exception.model;
 
 import java.util.Objects;
 
-public class Employee {                                // класс Employee, в нем строки фамилия-имя
-    //private  int id;
-    private final String firstName;                   //final - пот, что нет сеттера
+public class Employee {
+    private final String firstName;
     private final String lastName;
-    //private int department;
-    //private double salary;
-    //private static int counter = 0;               //это счетчик, отвечает за id
+
 
     public Employee(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-
     }
-
-    //public int getId() {        return id;    }
 
     public String getFirstName() {
         return firstName;
@@ -26,12 +20,9 @@ public class Employee {                                // класс Employee, �
         return lastName;
     }
 
-
-
-
     @Override
     public String toString() {
-        return firstName + lastName;
+        return firstName + " " + lastName;
     }
 
     @Override

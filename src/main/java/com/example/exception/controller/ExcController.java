@@ -1,7 +1,6 @@
 package com.example.exception.controller;
 
 import com.example.exception.exception.NotFoundRuntimeException;
-import com.example.exception.model.Employee;
 import com.example.exception.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +17,7 @@ public class ExcController {
     }
 
     @GetMapping("/add")
-    public Employee addEmployee(@RequestParam String lastName, @RequestParam String firstName) {
+    public String addEmployee(@RequestParam String lastName, @RequestParam String firstName) {
         return employeeService.addEmployee(lastName, firstName);
     }
 
@@ -28,7 +27,7 @@ public class ExcController {
     }
 
     @GetMapping("/find")
-    public Employee findEmployee(@RequestParam String lastName, @RequestParam String firstName) throws NotFoundRuntimeException {
-        return employeeService.findEmployee(lastName, firstName);
+    public String findEmployee(@RequestParam String lastName, @RequestParam String firstName) throws NotFoundRuntimeException {
+        return employeeService.findEmployee(lastName, firstName).toString();
     }
 }

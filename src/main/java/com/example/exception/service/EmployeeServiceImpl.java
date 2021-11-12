@@ -5,45 +5,42 @@ import com.example.exception.exception.NotFoundRuntimeException;
 import com.example.exception.model.Employee;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
-public class EmployeeServiceImpl implements EmployeeService{
-    Employee[] employee = {
-            new Employee("Иванов", "Иван"),
-            new Employee("Петров", "Петр"),
-            new Employee("Сидоров", "Сидор"),
-    };
+public class EmployeeServiceImpl implements EmployeeService {
+
+    private final ArrayList<Employee> employee = new ArrayList<>();
+
     @Override
-    public Employee addEmployee(String lastName, String firstName) throws IntServErrException {  //throws - чтобы внутри этого метода не обрабатывалось исключение
-        for (int i = 0; i < employee.length; i++) {
-            if (employee[i] == null) {
-                employee[i] = new Employee(lastName, firstName);
-                return employee[i];
-            }
+    public String addEmployee(String lastName, String firstName) throws IntServErrException {
+        Employee newEmployee = new Employee(lastName, firstName);
+        if (employee.size() < 3) {
+            employee.add(newEmployee);
+            return "Сотрудник " + newEmployee + " добавлен.";
+        } else {
+            throw new IntServErrException();
         }
-        throw new IntServErrException();
     }
 
     @Override
-    public Employee removeEmployee(String lastName, String firstName) throws NotFoundRuntimeException {    //throws - чтобы внутри этого метода не обрабатывалось исключение
-                  Employee removeEmp = new Employee(lastName, firstName);
-        for (int i = 0; i < employee.length; i++) {
-            if (employee[i].equals(removeEmp)) {
-                employee[i] = null;
-                return removeEmp;
-            }
-        }  // если в массиве сотрудников[i].сотрудник отсутствует
-            //то сотрудника нет
-        //вернуть  переменную
-        throw new NotFoundRuntimeException();
+    public String removeEmployee(String lastName, String firstName) throws NotFoundRuntimeException {
+        Employee removeEmployee = new Employee(lastName, firstName);
+        if (employee.contains(removeEmployee)) {
+            employee.remove(removeEmployee);
+            return "Сотрудник " + removeEmployee + " удален.";
+        } else {
+            throw new NotFoundRuntimeException();
+        }
     }
 
     @Override
     public Employee findEmployee(String lastName, String firstName) throws NotFoundRuntimeException {
 
         Employee findEmp = new Employee(lastName, firstName);
-        for (int i = 0; i < employee.length; i++) {
-            if (employee[i].equals(findEmp)) {
-                return findEmp;
+        for (int i = 0; i < employee.size(); i++) {
+            if (employee.get(i).equals(findEmp)) {
+                return employee.get(i);
             }
         }
         throw new NotFoundRuntimeException();
