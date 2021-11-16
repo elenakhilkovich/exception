@@ -1,6 +1,7 @@
 package com.example.exception.controller;
 
-import com.example.exception.exception.NotFoundRuntimeException;
+import com.example.exception.exception.ArrayOverflowException;
+import com.example.exception.exception.NotFoundException;
 import com.example.exception.model.Employee;
 import com.example.exception.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,16 +20,26 @@ public class ExcController {
 
     @GetMapping("/add")
     public Employee addEmployee(@RequestParam String lastName, @RequestParam String firstName) {
-        return employeeService.addEmployee(lastName, firstName);
+        try {
+            return employeeService.addEmployee(lastName, firstName);
+        } catch (ArrayOverflowException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @GetMapping("/remove")
     public String removeEmployee(@RequestParam String lastName, @RequestParam String firstName) {
-        return "Сотрудник " + employeeService.removeEmployee(lastName, firstName) + " удален.";
+        try {
+            return "Сотрудник " + employeeService.removeEmployee(lastName, firstName) + " удален.";
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+            return "Сотрудник не найден";
+        }
     }
 
     @GetMapping("/find")
-    public Employee findEmployee(@RequestParam String lastName, @RequestParam String firstName) throws NotFoundRuntimeException {
+    public Employee findEmployee(@RequestParam String lastName, @RequestParam String firstName) throws NotFoundException {
         return employeeService.findEmployee(lastName, firstName);
     }
 }
