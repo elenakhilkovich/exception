@@ -5,8 +5,8 @@ import com.example.exception.exception.NotFoundException;
 import com.example.exception.model.Employee;
 
 public interface EmployeeService {
-    Employee addEmployee(String lastName, String firstName) throws ArrayOverflowException;
-    Employee removeEmployee(String lastName, String firstName) throws NotFoundException;
+    Employee addEmployee(String lastName, String firstName);
+    Employee removeEmployee(String lastName, String firstName);
 
-    Employee findEmployee(String lastName, String firstName) throws NotFoundException;
+    Employee findEmployee(String lastName, String firstName);
 }

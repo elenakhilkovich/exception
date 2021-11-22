@@ -20,26 +20,18 @@ public class ExcController {
 
     @GetMapping("/add")
     public Employee addEmployee(@RequestParam String lastName, @RequestParam String firstName) {
-        try {
-            return employeeService.addEmployee(lastName, firstName);
-        } catch (ArrayOverflowException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return employeeService.addEmployee(lastName, firstName);
+
     }
 
     @GetMapping("/remove")
     public String removeEmployee(@RequestParam String lastName, @RequestParam String firstName) {
-        try {
-            return "Сотрудник " + employeeService.removeEmployee(lastName, firstName) + " удален.";
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-            return "Сотрудник не найден";
-        }
+
+        return "Сотрудник " + employeeService.removeEmployee(lastName, firstName) + " удален.";
     }
 
     @GetMapping("/find")
-    public Employee findEmployee(@RequestParam String lastName, @RequestParam String firstName) throws NotFoundException {
+    public Employee findEmployee(@RequestParam String lastName, @RequestParam String firstName) {
         return employeeService.findEmployee(lastName, firstName);
     }
 }

@@ -2,13 +2,11 @@ package com.example.exception.model;
 
 import java.util.Objects;
 
-public class Employee {                                // класс Employee, в нем строки фамилия-имя
+public class Employee {
     //private  int id;
     private final String firstName;                   //final - пот, что нет сеттера
     private final String lastName;
-    //private int department;
-    //private double salary;
-    //private static int counter = 0;               //это счетчик, отвечает за id
+
 
     public Employee(String firstName, String lastName) {
         this.firstName = firstName;
@@ -16,7 +14,6 @@ public class Employee {                                // класс Employee, �
 
     }
 
-    //public int getId() {        return id;    }
 
     public String getFirstName() {
         return firstName;

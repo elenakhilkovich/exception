@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class EmployeeServiceImpl implements EmployeeService{
     Employee[] employee = new Employee[3];
     @Override
-    public Employee addEmployee(String lastName, String firstName) throws ArrayOverflowException {  //throws - чтобы внутри этого метода не обрабатывалось исключение
+    public Employee addEmployee(String lastName, String firstName) {  //throws - чтобы внутри этого метода не обрабатывалось исключение
         for (int i = 0; i < employee.length; i++) {
             if (employee[i] == null) {
                 employee[i] = new Employee(lastName, firstName);
@@ -20,7 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public Employee removeEmployee(String lastName, String firstName) throws NotFoundException {    //throws - чтобы внутри этого метода не обрабатывалось исключение
+    public Employee removeEmployee(String lastName, String firstName)  {    //throws - чтобы внутри этого метода не обрабатывалось исключение
                   Employee removeEmp = new Employee(lastName, firstName);
         for (int i = 0; i < employee.length; i++) {
             if (employee[i].equals(removeEmp)) {
@@ -28,13 +28,12 @@ public class EmployeeServiceImpl implements EmployeeService{
                 return removeEmp;
             }
         }  // если в массиве сотрудников[i].сотрудник отсутствует
-            //то сотрудника нет
-        //вернуть  переменную
+
         throw new NotFoundException();
     }
 
     @Override
-    public Employee findEmployee(String lastName, String firstName) throws NotFoundException {
+    public Employee findEmployee(String lastName, String firstName)  {
 
         Employee findEmp = new Employee(lastName, firstName);
         for (int i = 0; i < employee.length; i++) {
