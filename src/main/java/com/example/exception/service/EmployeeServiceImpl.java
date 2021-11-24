@@ -1,7 +1,7 @@
 package com.example.exception.service;
 
-import com.example.exception.exception.IntServErrException;
-import com.example.exception.exception.NotFoundRuntimeException;
+import com.example.exception.exception.ArrayOverflowException;
+import com.example.exception.exception.NotFoundException;
 import com.example.exception.model.Employee;
 import org.springframework.stereotype.Service;
 
@@ -13,29 +13,29 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final ArrayList<Employee> employee = new ArrayList<>();
 
     @Override
-    public String addEmployee(String lastName, String firstName) throws IntServErrException {
-        Employee newEmployee = new Employee(lastName, firstName);
+    public Employee addEmployee(String lastName, String firstName) {
+        Employee newEmployee = new Employee(lastName, firstName);//throws - чтобы внутри этого метода не обрабатывалось исключение
         if (employee.size() < 3) {
             employee.add(newEmployee);
-            return "Сотрудник " + newEmployee + " добавлен.";
+            return newEmployee;
         } else {
-            throw new IntServErrException();
+            throw new ArrayOverflowException();
         }
     }
 
     @Override
-    public String removeEmployee(String lastName, String firstName) throws NotFoundRuntimeException {
+    public Employee removeEmployee(String lastName, String firstName)  {    //throws - чтобы внутри этого метода не обрабатывалось исключение
         Employee removeEmployee = new Employee(lastName, firstName);
         if (employee.contains(removeEmployee)) {
             employee.remove(removeEmployee);
-            return "Сотрудник " + removeEmployee + " удален.";
+            return removeEmployee;
         } else {
             throw new NotFoundRuntimeException();
         }
     }
 
     @Override
-    public Employee findEmployee(String lastName, String firstName) throws NotFoundRuntimeException {
+    public Employee findEmployee(String lastName, String firstName)  {
 
         Employee findEmp = new Employee(lastName, firstName);
         for (int i = 0; i < employee.size(); i++) {
@@ -43,7 +43,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 return employee.get(i);
             }
         }
-        throw new NotFoundRuntimeException();
+        throw new NotFoundException();
     }
 }
 
