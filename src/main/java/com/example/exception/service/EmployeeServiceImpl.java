@@ -30,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             employee.remove(removeEmployee);
             return removeEmployee;
         } else {
-            throw new NotFoundRuntimeException();
+            throw new NotFoundException();
         }
     }
 
