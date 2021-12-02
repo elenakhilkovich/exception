@@ -1,7 +1,5 @@
 package com.example.exception.controller;
 
-import com.example.exception.exception.ArrayOverflowException;
-import com.example.exception.exception.NotFoundException;
 import com.example.exception.model.Employee;
 import com.example.exception.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +19,10 @@ public class ExcController {
     @GetMapping("/add")
     public Employee addEmployee(@RequestParam String lastName, @RequestParam String firstName) {
         return employeeService.addEmployee(lastName, firstName);
-
     }
 
     @GetMapping("/remove")
     public String removeEmployee(@RequestParam String lastName, @RequestParam String firstName) {
-
         return "Сотрудник " + employeeService.removeEmployee(lastName, firstName) + " удален.";
     }
 

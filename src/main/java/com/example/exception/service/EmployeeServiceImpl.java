@@ -5,40 +5,40 @@ import com.example.exception.exception.NotFoundException;
 import com.example.exception.model.Employee;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
-public class EmployeeServiceImpl implements EmployeeService{
-    Employee[] employee = new Employee[3];
+public class EmployeeServiceImpl implements EmployeeService {
+
+    private final List<Employee> employee = new ArrayList<>();   //убрала ArraysList
+
     @Override
-    public Employee addEmployee(String lastName, String firstName) {  //throws - чтобы внутри этого метода не обрабатывалось исключение
-        for (int i = 0; i < employee.length; i++) {
-            if (employee[i] == null) {
-                employee[i] = new Employee(lastName, firstName);
-                return employee[i];
-            }
+    public Employee addEmployee(String lastName, String firstName) {
+        Employee newEmployee = new Employee(lastName, firstName);
+
+        employee.add(newEmployee);
+        return newEmployee;
+    }
+
+    @Override
+    public Employee removeEmployee(String lastName, String firstName) {
+        Employee employeeToRemove = new Employee(lastName, firstName);
+        if (employee.contains(employeeToRemove)) {
+            employee.remove(employeeToRemove);
+            return employeeToRemove;
+        } else {
+            throw new NotFoundException();
         }
-        throw new ArrayOverflowException();
     }
 
     @Override
-    public Employee removeEmployee(String lastName, String firstName)  {    //throws - чтобы внутри этого метода не обрабатывалось исключение
-                  Employee removeEmp = new Employee(lastName, firstName);
-        for (int i = 0; i < employee.length; i++) {
-            if (employee[i].equals(removeEmp)) {
-                employee[i] = null;
-                return removeEmp;
-            }
-        }  // если в массиве сотрудников[i].сотрудник отсутствует
+    public Employee findEmployee(String lastName, String firstName) {
 
-        throw new NotFoundException();
-    }
-
-    @Override
-    public Employee findEmployee(String lastName, String firstName)  {
-
-        Employee findEmp = new Employee(lastName, firstName);
-        for (int i = 0; i < employee.length; i++) {
-            if (employee[i].equals(findEmp)) {
-                return findEmp;
+        Employee employeeToFind = new Employee(lastName, firstName);
+        for (int i = 0; i < employee.size(); i++) {
+            if (employee.get(i).equals(employeeToFind)) {
+                return employeeToFind;
             }
         }
         throw new NotFoundException();
