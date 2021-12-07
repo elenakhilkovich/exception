@@ -22,10 +22,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee removeEmployee(String lastName, String firstName) {
-        Employee employeeToRemove = new Employee(lastName, firstName);
         if (employeeMap.containsKey(lastName + " " + firstName)) {
-            employeeMap.remove(lastName + " " + firstName);
-            return employeeToRemove;
+            return employeeMap.remove(lastName + " " + firstName);
         } else {
             throw new NotFoundException();
         }
@@ -33,13 +31,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee findEmployee(String lastName, String firstName) {
-
-        for (Map.Entry<String, Employee> employeeEntry: employeeMap.entrySet()) {
-            if (employeeEntry.getKey().equals(lastName + " " + firstName)) {
-                return employeeEntry.getValue();
-            }
+        if (employeeMap.containsKey(lastName + " " + firstName)) {
+            return employeeMap.get(lastName + " " + firstName);
+        } else {
+            throw new NotFoundException();
         }
-        throw new NotFoundException();
     }
 }
 
