@@ -1,32 +1,29 @@
 package com.example.exception.service;
 
-import com.example.exception.exception.ArrayOverflowException;
 import com.example.exception.exception.NotFoundException;
 import com.example.exception.model.Employee;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final List<Employee> employee = new ArrayList<>();   //убрала ArraysList
+    private final Map<String, Employee> employeeMap = new HashMap<>();
 
     @Override
     public Employee addEmployee(String lastName, String firstName) {
         Employee newEmployee = new Employee(lastName, firstName);
 
-        employee.add(newEmployee);
-        return newEmployee;
+        employeeMap.put(lastName + " " + firstName, newEmployee);
+        return employeeMap.get(lastName + " " + firstName);
     }
 
     @Override
     public Employee removeEmployee(String lastName, String firstName) {
-        Employee employeeToRemove = new Employee(lastName, firstName);
-        if (employee.contains(employeeToRemove)) {
-            employee.remove(employeeToRemove);
-            return employeeToRemove;
+        if (employeeMap.containsKey(lastName + " " + firstName)) {
+            return employeeMap.remove(lastName + " " + firstName);
         } else {
             throw new NotFoundException();
         }
@@ -34,14 +31,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee findEmployee(String lastName, String firstName) {
-
-        Employee employeeToFind = new Employee(lastName, firstName);
-        for (int i = 0; i < employee.size(); i++) {
-            if (employee.get(i).equals(employeeToFind)) {
-                return employeeToFind;
-            }
+        if (employeeMap.containsKey(lastName + " " + firstName)) {
+            return employeeMap.get(lastName + " " + firstName);
+        } else {
+            throw new NotFoundException();
         }
-        throw new NotFoundException();
     }
 }
 
