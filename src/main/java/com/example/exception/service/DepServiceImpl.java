@@ -1,15 +1,11 @@
 package com.example.exception.service;
 
-import com.example.exception.exception.NotFoundException;
 import com.example.exception.model.Employee;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.Set;
 
 @Service
 public class DepServiceImpl implements DepService {
@@ -21,18 +17,20 @@ public class DepServiceImpl implements DepService {
     }
 
     @Override
-    public Optional<Employee> getMaxSalary(int departmentId) {
+    public Employee getMaxSalary(int departmentId) {
         return employeeService.getEmployees().stream()
                 .filter(e -> e.getDepartment() == departmentId)
-                .max(Comparator.comparingInt(Employee::getSalary));
+                .max(Comparator.comparingInt(Employee::getSalary))
+                .orElseThrow();
 
     }
 
     @Override
-    public Optional<Employee> getMinSalary(int departmentId) {
+    public Employee getMinSalary(int departmentId) {
         return employeeService.getEmployees().stream()
                 .filter(e -> e.getDepartment() == departmentId)
-                .min(Comparator.comparingInt(Employee::getSalary));
+                .min(Comparator.comparingInt(Employee::getSalary))
+                .orElseThrow();
     }
 
     @Override

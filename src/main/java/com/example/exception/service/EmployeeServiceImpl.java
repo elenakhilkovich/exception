@@ -25,54 +25,36 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMap.put("Васильев Василий Васильевич", new Employee("Васильев", "Василий", 5, 500000));
     }
 
-        @Override
-        public Employee addEmployee (String lastName, String firstName, int departmentId, int salary){
-            Employee newEmployee = new Employee(lastName, firstName, departmentId, salary);
+    @Override
+    public Employee addEmployee(String lastName, String firstName, int departmentId, int salary) {
+        Employee newEmployee = new Employee(lastName, firstName, departmentId, salary);
 
-            employeeMap.put(lastName + " " + firstName, newEmployee);
-            return employeeMap.get(lastName + " " + firstName);
-        }
-        @Override
-        public Optional<Employee> getMaxSalary(int departmentId) {
-            final Employee maxSalEmp;
-            Optional<Employee> maxSal = employeeMap.values().stream().filter(e -> e.getDepartment() == departmentId).max(Comparator.comparingInt(e -> e.getSalary()));
-            return maxSal;
-        }
+        employeeMap.put(lastName + " " + firstName, newEmployee);
+        return employeeMap.get(lastName + " " + firstName);
+    }
 
-        @Override
-        public Optional<Integer> getMinSalary(int departmentId) {
-            Optional<Integer> minSal = employeeMap.values().stream().filter(e -> e.getDepartment() == departmentId).map(Employee::getSalary).min(Comparator.naturalOrder());
-            return minSal;
-        }
 
-        @Override
-        public List<Employee> printDepartmentEmployee(int departmentId) {
-            List<Employee> all = employeeMap.values().stream().filter(e -> e.getDepartment() == departmentId).collect(Collectors.toList());
-            return all;
+    @Override
+    public Employee removeEmployee(String lastName, String firstName) {
+        if (employeeMap.containsKey(lastName + " " + firstName)) {
+            return employeeMap.remove(lastName + " " + firstName);
         }
-
-        @Override
-        public Employee removeEmployee (String lastName, String firstName){
-            if (employeeMap.containsKey(lastName + " " + firstName)) {
-                return employeeMap.remove(lastName + " " + firstName);
-            } else {
-                throw new NotFoundException();
-            }
-        }
-
-        @Override
-        public Employee findEmployee (String lastName, String firstName){
-            if (employeeMap.containsKey(lastName + " " + firstName)) {
-                return employeeMap.get(lastName + " " + firstName);
-            } else {
-                throw new NotFoundException();
-            }
-        }
-        @Override
-        public Set<Employee> getEmployees(){
-            return new HashSet<>(employeeMap.values());
-        }
-
+        throw new NotFoundException();
 
     }
+
+    @Override
+    public Employee findEmployee(String lastName, String firstName) {
+        if (employeeMap.containsKey(lastName + " " + firstName)) {
+            return employeeMap.get(lastName + " " + firstName);
+        }
+        throw new NotFoundException();
+
+    }
+
+    @Override
+    public Set<Employee> getEmployees() {
+        return new HashSet<>(employeeMap.values());
+    }
+}
 

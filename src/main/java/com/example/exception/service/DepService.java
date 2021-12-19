@@ -1,15 +1,15 @@
 package com.example.exception.service;
+
 import com.example.exception.model.Employee;
 
 import java.util.List;
-import java.util.Optional;
 
-    public interface DepService {
-        Optional<Employee> getMaxSalary(int departmentId);
+public interface DepService {
+    Employee getMaxSalary(int departmentId);
 
-        Optional<Employee> getMinSalary(int departmentId);
+    Employee getMinSalary(int departmentId);
 
-        List<Employee> printDepartmentEmployee(int departmentId);
+    List<Employee> printDepartmentEmployee(int departmentId);
 
-        List<Employee> printDepartmentEmployee();
-    }
+    List<Employee> printDepartmentEmployee();
+}
