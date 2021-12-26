@@ -17,8 +17,8 @@ public class ExcController {
     }
 
     @GetMapping("/add")
-    public Employee addEmployee(@RequestParam String lastName, @RequestParam String firstName) {
-        return employeeService.addEmployee(lastName, firstName);
+    public Employee addEmployee(@RequestParam String lastName, @RequestParam String firstName, @RequestParam int departmentId, @RequestParam int salary) {
+        return employeeService.addEmployee(lastName, firstName, departmentId, salary);
     }
 
     @GetMapping("/remove")
@@ -30,4 +30,5 @@ public class ExcController {
     public Employee findEmployee(@RequestParam String lastName, @RequestParam String firstName) {
         return employeeService.findEmployee(lastName, firstName);
     }
+
 }
