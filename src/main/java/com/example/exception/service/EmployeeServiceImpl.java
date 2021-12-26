@@ -30,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee newEmployee = new Employee(lastName, firstName, departmentId, salary);
 
         employeeMap.put(lastName + " " + firstName, newEmployee);
-        return employeeMap.get(lastName + " " + firstName);
+        return newEmployee;
     }
 
 
