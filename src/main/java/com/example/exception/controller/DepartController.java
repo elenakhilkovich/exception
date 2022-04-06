@@ -21,20 +21,21 @@ public class DepartController {
 
     @GetMapping("/max-salary")
     public Employee getMaxSalary(@RequestParam int departmentId) {
-        return depService.getMaxSalary(departmentId);
+        return depService.getMaxSalary(departmentId)
+                .orElseThrow();
     }
-
     @GetMapping("/min-salary")
     public Employee getMinSalary(@RequestParam int departmentId) {
-        return depService.getMinSalary(departmentId);
+        return depService.getMinSalary(departmentId)
+                .orElseThrow();
     }
 
     @GetMapping("/all")
     public List<Employee> printDepartmentEmployee(Integer departmentId) {
         if (departmentId == null) {
-            return depService.printDepartmentEmployee();
+            return depService.getDepEmployee();
         } else {
-            return depService.printDepartmentEmployee(departmentId);
+            return depService.getDepEmployee(departmentId);
         }
     }
 }
