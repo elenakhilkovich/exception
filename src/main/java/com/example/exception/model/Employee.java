@@ -49,6 +49,10 @@ public class Employee {
     public int hashCode() {
         return Objects.hash(firstName + lastName);
     }
+
+    public Employee get() {
+        return null;
+    }
 }
 
 

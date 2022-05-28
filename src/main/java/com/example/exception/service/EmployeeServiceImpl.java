@@ -5,6 +5,7 @@ import com.example.exception.exception.EmployeeNotFoundException;
 import com.example.exception.model.Employee;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.*;
@@ -15,14 +16,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final Map<String, Employee> employeeMap;
 
-    public EmployeeServiceImpl() {
-        this.employeeMap = new HashMap<>();
-
+    @PostConstruct
+    public void init() {
         employeeMap.put("Сидоров Сидор", new Employee("Сидоров", "Сидор", 1, 100000));
         employeeMap.put("Петров Петр", new Employee("Петров", "Петр", 2, 200000));
         employeeMap.put("Андреев Андрей", new Employee("Андреев", "Андрей", 3, 300000));
         employeeMap.put("Антонов Антон", new Employee("Антонов", "Антон", 4, 400000));
         employeeMap.put("Васильев Василий", new Employee("Васильев", "Василий", 5, 500000));
+
+    }
+
+    public EmployeeServiceImpl() {
+        this.employeeMap = new HashMap<>();
     }
 
     @Override

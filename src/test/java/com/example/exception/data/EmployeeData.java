@@ -20,10 +20,10 @@ public class EmployeeData {
     public static final Employee EMPLOYEE_2 = new Employee("Дмитриев", "Дмитрий", 1, 1500);
     public static final Employee EMPLOYEE_3 = new Employee("Степанов", "Степан", 2, 2000);
     public static final Employee EMPLOYEE_4 = new Employee("Николаев", "Николай", 2, 1000);
-    public static final Set<Employee> TEST_SET_EMPLOYEE = new HashSet<>(Set.of(EMPLOYEE_1, EMPLOYEE_2, EMPLOYEE_3,EMPLOYEE_4));
+    public static final Set<Employee> TEST_SET_EMPLOYEE = Set.of(EMPLOYEE_1, EMPLOYEE_2, EMPLOYEE_3,EMPLOYEE_4);
     public static final Set<Employee> TEST_EMPTY_SET_EMPLOYEE = new HashSet<>();
-    public static final List<Employee> TEST_SORTED_LIST_EMPLOYEE = new ArrayList<>(List.of(EMPLOYEE_2, EMPLOYEE_3, EMPLOYEE_1));
-    public static final List<Employee> TEST_SORTED_DEPART_LIST_EMPLOYEE = new ArrayList<>(List.of(EMPLOYEE_3));
+    public static final List<Employee> TEST_SORTED_LIST_EMPLOYEE = List.of(EMPLOYEE_2, EMPLOYEE_3, EMPLOYEE_1);
+    public static final List<Employee> TEST_SORTED_DEPART_LIST_EMPLOYEE = List.of(EMPLOYEE_3);
 
 
 

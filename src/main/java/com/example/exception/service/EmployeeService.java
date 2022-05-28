@@ -9,7 +9,7 @@ public interface EmployeeService {
 
     Employee addEmployee(String lastName, String firstName, int departmentId, int salary);
 
-    Employee removeEmployee(String lastName, String firstName)throws EmployeeNotFoundException;
+    Employee removeEmployee(String lastName, String firstName);
 
     Employee findEmployee(String lastName, String firstName);
 

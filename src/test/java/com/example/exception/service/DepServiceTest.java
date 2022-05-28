@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static com.example.exception.data.EmployeeData.*;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class DepServiceTest {
@@ -69,7 +71,7 @@ class DepServiceTest {
         when(employeeServiceMock.getEmployees())
                 .thenReturn(TEST_SET_EMPLOYEE);
 
-        assertEquals(Optional.empty(), out.getMaxSalary(DEPARTMENT_ID_INCORRECT));
+        assertThrows(NoSuchElementException.class, () -> out.getMaxSalary(DEPARTMENT_ID_INCORRECT));
     }
 
     @Test
@@ -77,7 +79,7 @@ class DepServiceTest {
         when(employeeServiceMock.getEmployees())
                 .thenReturn(TEST_EMPTY_SET_EMPLOYEE);
 
-        assertEquals(Optional.empty(), out.getMaxSalary(DEPARTMENT_ID_INCORRECT));
+        assertThrows(NoSuchElementException.class, () -> out.getMaxSalary(DEPARTMENT_ID_INCORRECT));
     }
 
     @Test
@@ -94,7 +96,7 @@ class DepServiceTest {
         when(employeeServiceMock.getEmployees())
                 .thenReturn(TEST_SET_EMPLOYEE);
 
-        assertEquals(Optional.empty(), out.getMaxSalary(DEPARTMENT_ID_INCORRECT));
+        assertThrows(NoSuchElementException.class, () -> out.getMinSalary(DEPARTMENT_ID_INCORRECT));
     }
 
     @Test
@@ -102,6 +104,6 @@ class DepServiceTest {
         when(employeeServiceMock.getEmployees())
                 .thenReturn(TEST_EMPTY_SET_EMPLOYEE);
 
-        assertEquals(Optional.empty(), out.getMaxSalary(DEPARTMENT_ID_INCORRECT));
+        assertThrows(NoSuchElementException.class, () -> out.getMinSalary(DEPARTMENT_ID_INCORRECT));
     }
 }
